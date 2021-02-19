@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Document</title>
+</head>
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.5.1/jquery.js"></script>
+<body>
+  <script>
+    function showInfo123(data) {
+      console.log(data);
+      let ul=document.createElement('ul');
+      
+      //创建文档碎片
+      let suipian=document.createDocumentFragment();
+
+     
+      for(var key in data){
+         let li=document.createElement('li');
+         li.innerHTML=data[key];
+         suipian.appendChild(li);
+      }
+
+      ul.appendChild(suipian);
+
+      $('body').append(ul);
+
+      //利用文档碎片，可以进行网站性能优化，减少dom重绘。
+     
+    }
+  </script>
+
+
+
+<!-- <script>
+  show()
+</script> -->
+
+
+<button id="btn">jsonp</button>
+<!-- <script src="http://127.0.0.1:3000/getscript?callback=showInfo123"></script> -->
+
+<script>
+    showInfo123({name:'xjj',age:18,gender:'女孩子'})
+</script>
+</body>
+
+</html>
+
+<script>
+$('#btn').click(function(){
+    // 1. 动态创建 script 标签
+  var frame = document.createElement('script');
+    // 2. 给script 标签，设置 src='url?callback=showIn123fo',参数为回调函数名 （callback=fn）
+  frame.src = 'http://localhost:3000/getscript?callback=showInfo123';
+
+  //添加到页面中。
+  $('body').append(frame);
+})
+</script>
